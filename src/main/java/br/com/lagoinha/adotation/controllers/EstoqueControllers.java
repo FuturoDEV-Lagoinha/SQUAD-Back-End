@@ -23,4 +23,19 @@ public class EstoqueControllers {
     public Estoque post(@RequestBody Estoque estoque){
         return estoqueServices.cadastrar(estoque);
     }
+    @GetMapping("/{id}")
+    public Estoque getId(@PathVariable Long id){
+        return estoqueServices.listarPorId(id);
+    }
+
+    //editar
+    @PutMapping("/{id}")
+    public Estoque put(@PathVariable Long id, @RequestBody Estoque estoque){
+        return  estoqueServices.editar(id, estoque);
+    }
+    //deletar
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        estoqueServices.deletarPorId(id);
+    }
 }
