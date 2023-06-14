@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,6 +18,10 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "produto_id")
     private Long id;
+
+    @JoinColumn(name = "estoque_id", nullable = false)
+    @ManyToOne
+    private Estoque estoque_id;
 
     @Column(length = 40, nullable = false)
     private String produto;

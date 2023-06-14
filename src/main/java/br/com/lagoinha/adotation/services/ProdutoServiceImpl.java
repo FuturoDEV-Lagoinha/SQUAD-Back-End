@@ -5,13 +5,14 @@ import br.com.lagoinha.adotation.repositories.ProdutoRepository;
 import br.com.lagoinha.adotation.services.interfaces.ProdutoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
+@Service
 public class ProdutoServiceImpl implements ProdutoService {
 
     @Autowired
@@ -29,7 +30,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     public Produto atualizar(Produto produto) {
         Produto produtoPesquisado = buscarPorId(produto.getId());
-        if( produtoPesquisado != null){
+        if(produtoPesquisado != null){
             BeanUtils.copyProperties(produto, produtoPesquisado);
             return this.produtoRepository.save(produtoPesquisado);
         }
