@@ -3,6 +3,7 @@ package br.com.lagoinha.adotation.controllers;
 import br.com.lagoinha.adotation.entities.Produto;
 import br.com.lagoinha.adotation.services.interfaces.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +26,16 @@ public class ProdutoController {
     }
 
 
-    @PostMapping
+    /* @PostMapping
     public Produto salvar(@RequestBody Produto produto){
         return this.produtoService.salvar(produto);
+    }
+    */
+    @PostMapping
+    public ResponseEntity<?> salvar(@RequestBody Produto produto) {
+        produto.setId(null);
+        produto = produtoService.salvar(produto);
+        return ResponseEntity.ok(produto);
     }
 
     @PutMapping("/{id}")

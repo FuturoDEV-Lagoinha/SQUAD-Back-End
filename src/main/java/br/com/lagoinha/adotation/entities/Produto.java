@@ -19,9 +19,9 @@ public class Produto {
     @Column(name = "produto_id")
     private Long id;
 
-    @JoinColumn(name = "estoque_id", nullable = false)
+    @JoinColumn(name = "nome_estoque", nullable = false)
     @ManyToOne
-    private Estoque estoque_id;
+    private Estoque estoque;
 
     @Column(length = 40, nullable = false)
     private String produto;

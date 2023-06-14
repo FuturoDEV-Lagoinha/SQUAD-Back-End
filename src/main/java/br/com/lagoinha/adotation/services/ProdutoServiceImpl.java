@@ -47,6 +47,10 @@ public class ProdutoServiceImpl implements ProdutoService {
         return null;
     }
 
+    public Optional<Produto> buscarPorProduto(String produto){
+        return this.produtoRepository.findByProdutoIgnoreCase(produto);
+    }
+
     @Override
     public boolean removerPorId(Long id) {
         try{
@@ -60,6 +64,8 @@ public class ProdutoServiceImpl implements ProdutoService {
         }
         return true;
     }
+
+
 
 
 }
