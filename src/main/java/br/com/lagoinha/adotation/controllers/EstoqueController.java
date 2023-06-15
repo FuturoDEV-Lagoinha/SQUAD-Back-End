@@ -1,7 +1,7 @@
 package br.com.lagoinha.adotation.controllers;
 
 import br.com.lagoinha.adotation.entities.Estoque;
-import br.com.lagoinha.adotation.services.EstoqueServices;
+import br.com.lagoinha.adotation.services.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,33 +9,33 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/estoque")
-public class EstoqueControllers {
+public class EstoqueController {
     @Autowired
-    private EstoqueServices estoqueServices;
+    private EstoqueService estoqueService;
     //lista de estoque
     @GetMapping
     public List<Estoque> get(){
-        return estoqueServices.listar();
+        return estoqueService.listar();
     }
 
     //cadastrar
     @PostMapping
     public Estoque post(@RequestBody Estoque estoque){
-        return estoqueServices.cadastrar(estoque);
+        return estoqueService.cadastrar(estoque);
     }
     @GetMapping("/{id}")
     public Estoque getId(@PathVariable Long id){
-        return estoqueServices.listarPorId(id);
+        return estoqueService.listarPorId(id);
     }
 
     //editar
     @PutMapping("/{id}")
     public Estoque put(@PathVariable Long id, @RequestBody Estoque estoque){
-        return  estoqueServices.editar(id, estoque);
+        return  estoqueService.editar(id, estoque);
     }
     //deletar
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
-        estoqueServices.deletarPorId(id);
+        estoqueService.deletarPorId(id);
     }
 }
