@@ -39,7 +39,10 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@RequestBody Produto produto){
+    public Produto atualizar(@RequestBody Produto produto) throws Exception{
+        if(produto.getEstoque() == null){
+            throw new Exception("Estoque não encontrado!");
+        }
             return this.produtoService.atualizar(produto);
     }
 

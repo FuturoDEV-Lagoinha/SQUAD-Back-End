@@ -25,11 +25,13 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public Produto salvar(Produto produto) {
+
         return this.produtoRepository.save(produto);
     }
 
     public Produto atualizar(Produto produto) {
         Produto produtoPesquisado = buscarPorId(produto.getId());
+
         if(produtoPesquisado != null){
             BeanUtils.copyProperties(produto, produtoPesquisado);
             return this.produtoRepository.save(produtoPesquisado);
