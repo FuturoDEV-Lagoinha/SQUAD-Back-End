@@ -12,8 +12,8 @@ public class Estoque {
     @Column(name = "estoque_id")
     private Long id;
 
-    @Column(length = 15, nullable = false)
-    private String nome_estoque;
+    @Column( name = "nome_estoque", length = 15, nullable = false)
+    private String nome;
 
     @Column(length = 10, nullable = false)
     private String animal;

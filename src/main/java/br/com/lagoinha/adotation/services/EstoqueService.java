@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EstoqueServices {
+public class EstoqueService {
     @Autowired
     private EstoqueRepository estoqueRepository;
 
@@ -17,6 +17,7 @@ public class EstoqueServices {
     public List<Estoque> listar(){
         return estoqueRepository.findAll();
     }
+
     //cadastro
     public Estoque cadastrar(Estoque estoque){
         return  estoqueRepository.save(estoque);
@@ -31,11 +32,22 @@ public class EstoqueServices {
             return null;
         }
     }
+
+    //buscar por nome
+    public Estoque buscarPorNome(String nome) {
+        Optional<Estoque> estoquePesquisado = estoqueRepository.findByNome(nome);
+
+        if(estoquePesquisado.isPresent()){
+            return estoquePesquisado.get();
+        }
+        return null;
+    }
+
     //editar
     public Estoque editar(Long id, Estoque estoqueAtualizado){
         Estoque estoquePesquisado = listarPorId(id);
         if (estoquePesquisado != null){
-            estoquePesquisado.setNome_estoque(estoqueAtualizado.getNome_estoque());
+            estoquePesquisado.setNome(estoqueAtualizado.getNome());
             estoquePesquisado.setAnimal(estoqueAtualizado.getAnimal());
             return estoqueRepository.save(estoquePesquisado);
         }
