@@ -1,18 +1,18 @@
 package br.com.lagoinha.adotation.controllers;
 
-import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
 import br.com.lagoinha.adotation.services.EstoqueService;
-import br.com.lagoinha.adotation.services.interfaces.ProdutoService;
+import br.com.lagoinha.adotation.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
+
 
     @Autowired
     private ProdutoService produtoService;
@@ -30,15 +30,17 @@ public class ProdutoController {
         return produtoService.mostrarTodos();
     }
 
-
     /* @PostMapping
     public Produto salvar(@RequestBody Produto produto){
         return this.produtoService.salvar(produto);
     }
     */
     @PostMapping
-    public ResponseEntity<?> salvar(@RequestBody Produto produto) {
+    public ResponseEntity<?> salvar(@RequestBody Produto produto) throws Exception {
         produto.setId(null);
+        //Estoque estoque = produto.setEstoque(estoqueService.buscarPorNome(produto.getEstoque()));
+        //produto.setEstoque() = produto.getEstoque();
+
         produto = produtoService.salvar(produto);
         return ResponseEntity.ok(produto);
     }

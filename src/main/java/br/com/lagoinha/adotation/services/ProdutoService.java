@@ -1,5 +1,6 @@
 package br.com.lagoinha.adotation.services;
 
+import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
 import br.com.lagoinha.adotation.repositories.EstoqueRepository;
 import br.com.lagoinha.adotation.repositories.ProdutoRepository;
@@ -11,13 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProdutoServiceImpl {
+public class ProdutoService {
 
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    @Autowired
-    private EstoqueRepository estoqueRepository;
 
     @Autowired
     private EstoqueService estoqueService;
@@ -26,22 +25,21 @@ public class ProdutoServiceImpl {
         return produtoRepository.findAll();
     }
 
-    public boolean existePorEstoque(String nomeEstoque) {
-        if(estoqueRepository.existsByNomeIgnoreCase(nomeEstoque)){
-            return true;
-        }
-        return false;
-    }
-
-
-
 
     public Produto salvar(Produto produto) throws Exception {
 
+        Estoque estoque = new Estoque();
         if(produto.getId() != null){
             buscarPorId(produto.getId());
         }
-
+        if(produto.getEstoque() != null){
+        }
+        try {
+            estoque = estoqueService.listarPorId(produto.getEstoque().getId());
+        } catch (Exception e) {
+            return null;
+        }
+        produto.setEstoque(estoque);
         return this.produtoRepository.save(produto);
     }
 
@@ -65,9 +63,6 @@ public class ProdutoServiceImpl {
         return null;
     }
 
-    public Optional<Produto> buscarPorProduto(String produto){
-        return this.produtoRepository.findByProdutoIgnoreCase(produto);
-    }
 
 
     public boolean removerPorId(Long id) {
