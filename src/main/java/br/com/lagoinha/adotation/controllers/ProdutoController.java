@@ -1,6 +1,8 @@
 package br.com.lagoinha.adotation.controllers;
 
+import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
+import br.com.lagoinha.adotation.services.EstoqueService;
 import br.com.lagoinha.adotation.services.interfaces.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,9 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoService produtoService;
+
+    @Autowired
+    private EstoqueService estoqueService;
 
     @GetMapping("/{id}")
     public Produto buscarPorId(@PathVariable Long id){
