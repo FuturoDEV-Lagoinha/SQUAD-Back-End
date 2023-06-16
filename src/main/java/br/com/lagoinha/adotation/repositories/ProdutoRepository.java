@@ -15,8 +15,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     @Query("SELECT p.estoque FROM Produto p WHERE UPPER(p.estoque.nome) LIKE UPPER(:nomeEstoque) ORDER BY p.estoque.nome DESC")
     Optional<Produto> findByEstoqueIgnoreCase(String nomeEstoque);
 
-
-
     Optional<Produto> findByProdutoIgnoreCase(String produto);
 
     @Query("SELECT CASE WHEN (count(*) > 0) THEN TRUE ELSE FALSE END FROM Produto p WHERE UPPER (p.estoque.nome) LIKE UPPER(:nomeEstoque)")

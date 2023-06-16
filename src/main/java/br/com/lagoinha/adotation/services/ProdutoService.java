@@ -2,7 +2,6 @@ package br.com.lagoinha.adotation.services;
 
 import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
-import br.com.lagoinha.adotation.repositories.EstoqueRepository;
 import br.com.lagoinha.adotation.repositories.ProdutoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +27,18 @@ public class ProdutoService {
 
     public Produto salvar(Produto produto) throws Exception {
 
-        Estoque estoque = new Estoque();
         if(produto.getId() != null){
             buscarPorId(produto.getId());
         }
+
         if(produto.getEstoque() != null){
+            try {
+                Estoque estoqueSelecionado = produto.getEstoque();
+                produto.setEstoque(estoqueSelecionado);
+            } catch (Exception e) {
+                return null;
+            }
         }
-        try {
-            estoque = estoqueService.listarPorId(produto.getEstoque().getId());
-        } catch (Exception e) {
-            return null;
-        }
-        produto.setEstoque(estoque);
         return this.produtoRepository.save(produto);
     }
 

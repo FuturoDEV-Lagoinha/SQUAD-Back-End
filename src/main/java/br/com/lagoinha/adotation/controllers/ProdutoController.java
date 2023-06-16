@@ -1,5 +1,6 @@
 package br.com.lagoinha.adotation.controllers;
 
+import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
 import br.com.lagoinha.adotation.services.EstoqueService;
 import br.com.lagoinha.adotation.services.ProdutoService;
@@ -37,20 +38,32 @@ public class ProdutoController {
     */
     @PostMapping
     public ResponseEntity<?> salvar(@RequestBody Produto produto) throws Exception {
+        try{
         produto.setId(null);
-        //Estoque estoque = produto.setEstoque(estoqueService.buscarPorNome(produto.getEstoque()));
-        //produto.setEstoque() = produto.getEstoque();
-
         produto = produtoService.salvar(produto);
         return ResponseEntity.ok(produto);
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@RequestBody Produto produto) throws Exception{
-        if(produto.getEstoque() == null){
-            throw new Exception("Estoque não encontrado!");
+    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+        try{
+            produto.setId(id);
+            return ResponseEntity.ok(produtoService.atualizar(produto));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-            return this.produtoService.atualizar(produto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id){
+        try{
+            return ResponseEntity.ok(produtoService.removerPorId(id));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 
