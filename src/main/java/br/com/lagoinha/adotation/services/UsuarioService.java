@@ -51,10 +51,10 @@ public class UsuarioService {
         return
 
     }
+    */
 
     public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();
     }
-    */
 
 }
