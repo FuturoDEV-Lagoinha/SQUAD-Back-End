@@ -27,8 +27,15 @@ public class UsuarioService {
 
         return usuarioRepository.save(usuario);
     }
-    /*
-    public Usuario validarLogin(Usuario login) throws Exception {
+/*
+    public boolean validaSenha(Usuario usuario, String email, String senha) {
+        if(usuarioRepository.existsByEmail(usuarioRepository.getEmail())){
+            usuario.getSenha(senha);
+            if()
+    }
+
+
+    public Usuario validarLogin(Usuario login, String email, String senha) throws Exception {
         if (login.getEmail() == null || login.getEmail().isEmpty()  ) {
             throw new Exception("Email é obrigatório");
         }
@@ -36,15 +43,18 @@ public class UsuarioService {
             throw new Exception("Senha é obrigatória");
         }
         //este if seria comparar email e senha se for diferente retorna mensagem de falha no login
-        if (!usuarioRepository.existsByEmailAndAndSenha(Usuario login)) {
+        if (!usuarioRepository.existsByEmailAndAndSenha(login)) {
             throw new Exception("Email ou senha incorreto");
         }
 
+    }
         return
 
-    } */
+    }
 
     public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();
     }
+    */
+
 }
