@@ -1,5 +1,6 @@
 package br.com.lagoinha.adotation.controllers;
 
+import br.com.lagoinha.adotation.dtos.ProdutoDTO;
 import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
 import br.com.lagoinha.adotation.services.EstoqueService;
@@ -37,9 +38,20 @@ public class ProdutoController {
     }
     */
     @PostMapping
-    public ResponseEntity<?> salvar(@RequestBody Produto produto) throws Exception {
-        try{
+    public ResponseEntity<?> salvar(@RequestBody ProdutoDTO produtoDto) throws Exception {
+        Produto produto = new Produto();
         produto.setId(null);
+        produto.setProduto(produtoDto.getProduto());
+        produto.setAnimal(produtoDto.getAnimal());
+        produto.setCategoria(produtoDto.getCategoria());
+        produto.setQuantidade(produtoDto.getQuantidade());
+
+        Estoque estoque = estoqueService.buscarPorId(produtoDto.getEstoque());
+        if(estoque == null) {
+            return ResponseEntity.badRequest().body("Estoque não encontrado");
+        }
+        produto.setEstoque(estoque);
+        try{
         produto = produtoService.salvar(produto);
         return ResponseEntity.ok(produto);
         } catch (Exception e){

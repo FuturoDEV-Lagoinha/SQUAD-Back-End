@@ -2,6 +2,7 @@ package br.com.lagoinha.adotation.services;
 
 import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
+import br.com.lagoinha.adotation.repositories.EstoqueRepository;
 import br.com.lagoinha.adotation.repositories.ProdutoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class ProdutoService {
 
 
     @Autowired
-    private EstoqueService estoqueService;
+    private EstoqueRepository estoqueRepository;
 
     public List<Produto> mostrarTodos() {
         return produtoRepository.findAll();

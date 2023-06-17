@@ -34,8 +34,8 @@ public class EstoqueService {
     }
 
     //buscar por nome
-    public Estoque buscarPorNome(String nome) {
-        Optional<Estoque> estoquePesquisado = estoqueRepository.findByNome(nome);
+    public Estoque buscarPorId(Long id) {
+        Optional<Estoque> estoquePesquisado = estoqueRepository.findById(id);
 
         if(estoquePesquisado.isPresent()){
             return estoquePesquisado.get();

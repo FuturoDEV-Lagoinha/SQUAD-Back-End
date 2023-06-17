@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface EstoqueRepository extends JpaRepository<Estoque, Long> {
-    Optional<Estoque> findByNome(String nome);
+    Optional<Estoque> findById(Long id);
 }

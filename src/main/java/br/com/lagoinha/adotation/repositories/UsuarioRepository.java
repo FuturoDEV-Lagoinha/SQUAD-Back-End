@@ -11,7 +11,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     boolean existsByEmail(String email);
 
-    Boolean existsByEmailAndAndSenha(Usuario login);
+    // Boolean existsByEmailAndAndSenha(Usuario login);
 
     @Query("SELECT usuario.email FROM Usuario usuario WHERE usuario.email LIKE :email")
     Optional<Usuario> findByEmail(String email);
