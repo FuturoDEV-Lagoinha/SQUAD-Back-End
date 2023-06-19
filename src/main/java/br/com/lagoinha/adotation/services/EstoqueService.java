@@ -19,8 +19,15 @@ public class EstoqueService {
     }
 
     //cadastro
-    public Estoque cadastrar(Estoque estoque){
-        return  estoqueRepository.save(estoque);
+    public Estoque cadastrar(Estoque estoque) throws Exception{
+        if (estoque.getNome() == null || estoque.getNome().isEmpty()){
+            throw new Exception("Nome é obrigatório!");
+        }
+        if (estoque.getAnimal() == null || estoque.getAnimal().isEmpty()){
+            throw new Exception("Valor para estoque é obrigatório!");
+
+        }
+            return  estoqueRepository.save(estoque);
     }
 
     //listar por id
@@ -31,16 +38,6 @@ public class EstoqueService {
         }else {
             return null;
         }
-    }
-
-    //buscar por nome
-    public Estoque buscarPorNome(String nome) {
-        Optional<Estoque> estoquePesquisado = estoqueRepository.findByNome(nome);
-
-        if(estoquePesquisado.isPresent()){
-            return estoquePesquisado.get();
-        }
-        return null;
     }
 
     //editar

@@ -3,6 +3,7 @@ package br.com.lagoinha.adotation.controllers;
 import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.services.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +21,14 @@ public class EstoqueController {
 
     //cadastrar
     @PostMapping
-    public Estoque post(@RequestBody Estoque estoque){
-        return estoqueService.cadastrar(estoque);
+    public ResponseEntity post(@RequestBody Estoque estoque){
+        try {
+            return ResponseEntity.ok(estoqueService.cadastrar(estoque));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
+
     @GetMapping("/{id}")
     public Estoque getId(@PathVariable Long id){
         return estoqueService.listarPorId(id);
