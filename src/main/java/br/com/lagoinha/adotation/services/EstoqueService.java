@@ -31,7 +31,7 @@ public class EstoqueService {
     }
 
     //listar por id
-    public Estoque listarPorId(Long id){
+    public Estoque buscarPorId(Long id){
         Optional<Estoque> estoquePesquisado = estoqueRepository.findById(id);
         if (estoquePesquisado.isPresent()){
             return estoquePesquisado.get();
@@ -42,7 +42,7 @@ public class EstoqueService {
 
     //editar
     public Estoque editar(Long id, Estoque estoqueAtualizado){
-        Estoque estoquePesquisado = listarPorId(id);
+        Estoque estoquePesquisado = buscarPorId(id);
         if (estoquePesquisado != null){
             estoquePesquisado.setNome(estoqueAtualizado.getNome());
             estoquePesquisado.setAnimal(estoqueAtualizado.getAnimal());

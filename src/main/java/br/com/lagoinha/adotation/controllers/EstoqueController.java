@@ -31,7 +31,7 @@ public class EstoqueController {
 
     @GetMapping("/{id}")
     public Estoque getId(@PathVariable Long id){
-        return estoqueService.listarPorId(id);
+        return estoqueService.buscarPorId(id);
     }
 
     //editar

@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -19,7 +17,7 @@ public class Produto {
     @Column(name = "produto_id")
     private Long id;
 
-    @JoinColumn(name = "nome_estoque", nullable = false)
+    @JoinColumn(name = "estoque_id", nullable = false)
     @ManyToOne
     private Estoque estoque;
 
