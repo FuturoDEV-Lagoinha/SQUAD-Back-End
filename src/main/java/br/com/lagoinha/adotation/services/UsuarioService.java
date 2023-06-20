@@ -1,11 +1,13 @@
 package br.com.lagoinha.adotation.services;
 
+import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Usuario;
 import br.com.lagoinha.adotation.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -48,6 +50,15 @@ public class UsuarioService {
 
     public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();
+    }
+
+    public Usuario buscarPorId(Long id){
+        Optional<Usuario> usuarioPesquisado = usuarioRepository.findById(id);
+        if (usuarioPesquisado.isPresent()){
+            return usuarioPesquisado.get();
+        }else {
+            return null;
+        }
     }
 
 }
