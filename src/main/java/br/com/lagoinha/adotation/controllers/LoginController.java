@@ -1,6 +1,5 @@
 package br.com.lagoinha.adotation.controllers;
 
-import br.com.lagoinha.adotation.dtos.LoginDTO;
 import br.com.lagoinha.adotation.entities.Usuario;
 import br.com.lagoinha.adotation.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +16,6 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
-
-    /*@PostMapping
-    public ResponseEntity post(@RequestBody LoginDTO loginDTO, String email) {
-        Usuario login = usuarioService.buscarPorId(loginDTO.getId());
-        login.setEmail(loginDTO.getEmail());
-        login.setSenha(loginDTO.getSenha());
-
-        try{
-            System.out.println("logou");
-            return ResponseEntity.ok(usuarioService.validarLogin(login));
-
-        } catch  (Exception e) {
-            System.out.println("não logou");
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    } */
     @PostMapping
     public ResponseEntity post(@RequestBody Usuario login) {
 

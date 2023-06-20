@@ -1,13 +1,10 @@
 package br.com.lagoinha.adotation.services;
 
-import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Usuario;
 import br.com.lagoinha.adotation.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -30,7 +27,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario validarLogin(Usuario login) throws Exception {
+    public Boolean validarLogin(Usuario login) throws Exception {
 
         if (login.getEmail() == null || login.getEmail().isEmpty()  ) {
             throw new Exception("Email é obrigatório");
@@ -42,24 +39,12 @@ public class UsuarioService {
         if (!usuarioRepository.existsByEmailAndSenha(login.getEmail(), login.getSenha())) {
             throw new Exception("Email ou senha incorreto");
         }
-        if (usuarioRepository.existsByEmailAndSenha(login.getEmail(), login.getEmail())) {
-            throw new Exception("Login efetuado com sucesso.");
-        }
-        System.out.println("login realizado");
-        return usuarioRepository.getReferenceById(login.getId());
+
+        return true;
     }
 
     public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();
-    }
-
-    public Usuario buscarPorId(Long id){
-        Optional<Usuario> usuarioPesquisado = usuarioRepository.findById(id);
-        if (usuarioPesquisado.isPresent()){
-            return usuarioPesquisado.get();
-        }else {
-            return null;
-        }
     }
 
 }
