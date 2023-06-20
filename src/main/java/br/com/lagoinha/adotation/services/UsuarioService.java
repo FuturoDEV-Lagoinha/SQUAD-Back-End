@@ -38,15 +38,16 @@ public class UsuarioService {
         if (login.getSenha() == null || login.getSenha().isEmpty()) {
             throw new Exception("Senha é obrigatória");
         }
-        //este if seria comparar email e senha se for diferente retorna mensagem de falha no login
+        // comparar email e senha se for diferente retorna mensagem de falha no login
         if (!usuarioRepository.existsByEmailAndSenha(login.getEmail(), login.getSenha())) {
             throw new Exception("Email ou senha incorreto");
         }
+        if (usuarioRepository.existsByEmailAndSenha(login.getEmail(), login.getEmail())) {
+            throw new Exception("Login efetuado com sucesso.");
+        }
         System.out.println("login realizado");
         return usuarioRepository.getReferenceById(login.getId());
-
     }
-
 
     public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();

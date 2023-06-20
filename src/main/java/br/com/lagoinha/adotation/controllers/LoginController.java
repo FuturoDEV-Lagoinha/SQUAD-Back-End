@@ -18,7 +18,7 @@ public class LoginController {
     private UsuarioService usuarioService;
 
 
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity post(@RequestBody LoginDTO loginDTO, String email) {
         Usuario login = usuarioService.buscarPorId(loginDTO.getId());
         login.setEmail(loginDTO.getEmail());
@@ -32,9 +32,15 @@ public class LoginController {
             System.out.println("não logou");
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    } */
+    @PostMapping
+    public ResponseEntity post(@RequestBody Usuario login) {
+
+        try {
+            return ResponseEntity.ok(usuarioService.validarLogin(login));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
-
-
-
 
 }
