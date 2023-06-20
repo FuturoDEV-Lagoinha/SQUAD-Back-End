@@ -4,6 +4,7 @@ import br.com.lagoinha.adotation.entities.Usuario;
 import br.com.lagoinha.adotation.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +15,17 @@ public class LoginController {
 
     @Autowired
     private UsuarioService usuarioService;
-/*
+
+    @PostMapping
     public ResponseEntity post(@RequestBody Usuario login) {
-        return ResponseEntity.badRequest().body(e getMessage());
+        try{
+            System.out.println("logou");
+            return ResponseEntity.ok(usuarioService.validarLogin(login));
+
+        } catch  (Exception e) {
+            System.out.println("não logou");
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
-    fazer outro push
-*/
 
 }
