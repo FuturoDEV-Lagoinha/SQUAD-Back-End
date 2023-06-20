@@ -16,8 +16,11 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
+
     @PostMapping
-    public ResponseEntity post(@RequestBody Usuario login) {
+    public ResponseEntity post(@RequestBody Usuario login, String email, String senha) {
+        login.setEmail(login.getEmail());
+        login.setSenha(login.getSenha());
         try{
             System.out.println("logou");
             return ResponseEntity.ok(usuarioService.validarLogin(login));
@@ -27,5 +30,8 @@ public class LoginController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+
+
 
 }

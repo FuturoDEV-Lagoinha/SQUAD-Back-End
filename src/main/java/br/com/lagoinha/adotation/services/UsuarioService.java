@@ -29,6 +29,7 @@ public class UsuarioService {
     }
 
     public Usuario validarLogin(Usuario login) throws Exception {
+
         if (login.getEmail() == null || login.getEmail().isEmpty()  ) {
             throw new Exception("Email é obrigatório");
         }
@@ -44,7 +45,9 @@ public class UsuarioService {
 
     }
 
+
     public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();
     }
+
 }

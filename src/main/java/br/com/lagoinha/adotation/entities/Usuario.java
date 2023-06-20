@@ -1,10 +1,14 @@
 package br.com.lagoinha.adotation.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 public class Usuario {
 
     @Id

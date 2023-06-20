@@ -19,12 +19,19 @@ public class EstoqueService {
     }
 
     //cadastro
-    public Estoque cadastrar(Estoque estoque){
-        return  estoqueRepository.save(estoque);
+    public Estoque cadastrar(Estoque estoque) throws Exception{
+        if (estoque.getNome() == null || estoque.getNome().isEmpty()){
+            throw new Exception("Nome é obrigatório!");
+        }
+        if (estoque.getAnimal() == null || estoque.getAnimal().isEmpty()){
+            throw new Exception("Valor para estoque é obrigatório!");
+
+        }
+            return  estoqueRepository.save(estoque);
     }
 
     //listar por id
-    public Estoque listarPorId(Long id){
+    public Estoque buscarPorId(Long id){
         Optional<Estoque> estoquePesquisado = estoqueRepository.findById(id);
         if (estoquePesquisado.isPresent()){
             return estoquePesquisado.get();
@@ -33,19 +40,9 @@ public class EstoqueService {
         }
     }
 
-    //buscar por nome
-    public Estoque buscarPorNome(String nome) {
-        Optional<Estoque> estoquePesquisado = estoqueRepository.findByNome(nome);
-
-        if(estoquePesquisado.isPresent()){
-            return estoquePesquisado.get();
-        }
-        return null;
-    }
-
     //editar
     public Estoque editar(Long id, Estoque estoqueAtualizado){
-        Estoque estoquePesquisado = listarPorId(id);
+        Estoque estoquePesquisado = buscarPorId(id);
         if (estoquePesquisado != null){
             estoquePesquisado.setNome(estoqueAtualizado.getNome());
             estoquePesquisado.setAnimal(estoqueAtualizado.getAnimal());
