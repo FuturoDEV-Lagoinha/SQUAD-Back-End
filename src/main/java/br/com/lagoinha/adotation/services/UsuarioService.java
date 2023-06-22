@@ -4,7 +4,6 @@ import br.com.lagoinha.adotation.entities.Usuario;
 import br.com.lagoinha.adotation.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -28,7 +27,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario validarLogin(Usuario login) throws Exception {
+    public Boolean validarLogin(Usuario login) throws Exception {
 
         if (login.getEmail() == null || login.getEmail().isEmpty()  ) {
             throw new Exception("Email é obrigatório");
@@ -36,15 +35,13 @@ public class UsuarioService {
         if (login.getSenha() == null || login.getSenha().isEmpty()) {
             throw new Exception("Senha é obrigatória");
         }
-        //este if seria comparar email e senha se for diferente retorna mensagem de falha no login
+        // comparar email e senha se for diferente retorna mensagem de falha no login
         if (!usuarioRepository.existsByEmailAndSenha(login.getEmail(), login.getSenha())) {
             throw new Exception("Email ou senha incorreto");
         }
-        System.out.println("login realizado");
-        return usuarioRepository.getReferenceById(login.getId());
 
+        return true;
     }
-
 
     public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();

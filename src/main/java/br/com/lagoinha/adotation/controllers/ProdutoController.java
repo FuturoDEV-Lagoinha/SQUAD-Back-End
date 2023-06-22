@@ -5,6 +5,7 @@ import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
 import br.com.lagoinha.adotation.services.EstoqueService;
 import br.com.lagoinha.adotation.services.ProdutoService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,13 +33,8 @@ public class ProdutoController {
         return produtoService.mostrarTodos();
     }
 
-    /* @PostMapping
-    public Produto salvar(@RequestBody Produto produto){
-        return this.produtoService.salvar(produto);
-    }
-    */
     @PostMapping
-    public ResponseEntity<?> salvar(@RequestBody ProdutoDTO produtoDto) throws Exception {
+    public ResponseEntity<?> salvar(@RequestBody ProdutoDTO produtoDto) {
         Produto produto = new Produto();
         produto.setId(null);
         produto.setProduto(produtoDto.getProduto());
@@ -59,8 +55,15 @@ public class ProdutoController {
         }
     }
 
+    // Só poderão ser editadas a quantidade e o tipo de produto:
+
     @PutMapping("/{id}")
     public ResponseEntity atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+
+        Produto produtoAtualizado = buscarPorId(id);
+        produto.setProduto(produtoAtualizado.getProduto());
+        produto.setQuantidade(produtoAtualizado.getQuantidade());
+
         try{
             produto.setId(id);
             return ResponseEntity.ok(produtoService.atualizar(produto));
