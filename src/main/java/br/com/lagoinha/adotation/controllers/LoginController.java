@@ -16,22 +16,14 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
-
     @PostMapping
-    public ResponseEntity post(@RequestBody Usuario login, String email, String senha) {
-        login.setEmail(login.getEmail());
-        login.setSenha(login.getSenha());
-        try{
-            System.out.println("logou");
-            return ResponseEntity.ok(usuarioService.validarLogin(login));
+    public ResponseEntity post(@RequestBody Usuario login) {
 
-        } catch  (Exception e) {
-            System.out.println("não logou");
+        try {
+            return ResponseEntity.ok(usuarioService.validarLogin(login));
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
-
-
 
 }
