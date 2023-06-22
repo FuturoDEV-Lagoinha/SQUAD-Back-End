@@ -1,5 +1,6 @@
 package br.com.lagoinha.adotation.services;
 
+import br.com.lagoinha.adotation.dtos.ProdutoDTO;
 import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
 import br.com.lagoinha.adotation.repositories.EstoqueRepository;
@@ -17,9 +18,6 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-
-    @Autowired
-    private EstoqueRepository estoqueRepository;
 
     public List<Produto> mostrarTodos() {
         return produtoRepository.findAll();
@@ -43,8 +41,27 @@ public class ProdutoService {
         return this.produtoRepository.save(produto);
     }
 
-    public Produto atualizar(Produto produto) {
+    public Produto atualizar(Produto produto) throws Exception{
         Produto produtoPesquisado = buscarPorId(produto.getId());
+
+        produtoPesquisado.setEstoque(produto.getEstoque());
+
+        // as variáveis não modificadas pelo usuário serão permanecidas como estão:
+
+        if(produto.getProduto() == null || produto.getProduto().isEmpty()){
+            produtoPesquisado.setProduto(produto.getProduto());
+        }
+        if(produto.getAnimal() == null || produto.getAnimal().isEmpty()){
+            produtoPesquisado.setAnimal(produto.getAnimal());
+        }
+        if(produto.getCategoria() == null || produto.getCategoria().isEmpty()){
+            produtoPesquisado.setCategoria(produto.getCategoria());
+        }
+        if(produto.getQuantidade() == null || produto.getQuantidade().toString().isEmpty()){
+            produtoPesquisado.setQuantidade(produto.getQuantidade());
+        }
+
+
 
         if(produtoPesquisado != null){
             BeanUtils.copyProperties(produto, produtoPesquisado);
@@ -77,7 +94,6 @@ public class ProdutoService {
         }
         return true;
     }
-
 
 
 

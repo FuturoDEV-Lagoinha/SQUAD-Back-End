@@ -21,16 +21,16 @@ public class Produto {
     @ManyToOne
     private Estoque estoque;
 
-    @Column(length = 40, nullable = false)
+    @Column(length = 40)
     private String produto;
 
     @Column(nullable = false)
     private Integer quantidade;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 10)
     private String animal;
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 15)
     private String categoria;
 
 }
