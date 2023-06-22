@@ -2,6 +2,7 @@ package br.com.lagoinha.adotation.services;
 
 import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.repositories.EstoqueRepository;
+import br.com.lagoinha.adotation.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ import java.util.Optional;
 public class EstoqueService {
     @Autowired
     private EstoqueRepository estoqueRepository;
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
     //listar
     public List<Estoque> listar(){
@@ -53,7 +56,19 @@ public class EstoqueService {
     }
 
     //deletar
-    public void deletarPorId(Long id){
+    public boolean deletarPorId(Long id) throws Exception{
+
+        Estoque estoquePesquisado = buscarPorId(id);
+
+        if(produtoRepository.existsByEstoque(id)){
+            throw new Exception("Estoque possui produto");
+        }
+        if (estoquePesquisado == null){
+            throw new Exception("Estoque nao pode ser deletado");
+        }
         this.estoqueRepository.deleteById(id);
+        return true;
     }
+
+
 }
