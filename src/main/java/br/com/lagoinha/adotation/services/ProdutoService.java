@@ -55,7 +55,6 @@ public class ProdutoService {
         //    produtoPesquisado.setCategoria(produto.getCategoria());
         //}
         if(produto.getQuantidade() != null && produto.getProduto() != null){
-            //BeanUtils.copyProperties(produto, produtoPesquisado);
             return this.produtoRepository.save(produtoPesquisado);
         }
         return null;
