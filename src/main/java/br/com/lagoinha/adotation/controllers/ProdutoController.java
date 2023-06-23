@@ -1,6 +1,7 @@
 package br.com.lagoinha.adotation.controllers;
 
 import br.com.lagoinha.adotation.dtos.ProdutoDTO;
+import br.com.lagoinha.adotation.dtos.ProdutoEditDTO;
 import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
 import br.com.lagoinha.adotation.services.EstoqueService;
@@ -58,15 +59,14 @@ public class ProdutoController {
     // Só poderão ser editadas a quantidade e o tipo de produto:
 
     @PutMapping("/{id}")
-    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody ProdutoEditDTO produtoEditDTO) {
 
         Produto produtoAtualizado = buscarPorId(id);
-        produto.setProduto(produtoAtualizado.getProduto());
-        produto.setQuantidade(produtoAtualizado.getQuantidade());
+        produtoAtualizado.setProduto(produtoEditDTO.getProduto());
+        produtoAtualizado.setQuantidade(produtoEditDTO.getQuantidade());
 
         try{
-            produto.setId(id);
-            return ResponseEntity.ok(produtoService.atualizar(produto));
+            return ResponseEntity.ok(produtoService.salvar(produtoAtualizado));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
