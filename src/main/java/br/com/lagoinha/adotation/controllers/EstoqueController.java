@@ -41,7 +41,13 @@ public class EstoqueController {
     }
     //deletar
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
-        estoqueService.deletarPorId(id);
+    public ResponseEntity delete(@PathVariable Long id){
+        try{
+            return ResponseEntity.ok(estoqueService.deletarPorId(id));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+
+        }
+
     }
 }
