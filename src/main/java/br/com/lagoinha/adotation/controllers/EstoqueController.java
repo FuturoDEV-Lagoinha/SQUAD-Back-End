@@ -1,6 +1,8 @@
 package br.com.lagoinha.adotation.controllers;
 
+import br.com.lagoinha.adotation.dtos.EstoqueDTO;
 import br.com.lagoinha.adotation.entities.Estoque;
+import br.com.lagoinha.adotation.repositories.ProdutoRepository;
 import br.com.lagoinha.adotation.services.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,10 @@ import java.util.List;
 public class EstoqueController {
     @Autowired
     private EstoqueService estoqueService;
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
     //lista de estoque
     @GetMapping
     public List<Estoque> get(){
@@ -36,8 +42,20 @@ public class EstoqueController {
 
     //editar
     @PutMapping("/{id}")
-    public Estoque put(@PathVariable Long id, @RequestBody Estoque estoque){
-        return  estoqueService.editar(id, estoque);
+    public ResponseEntity put(@PathVariable Long id, @RequestBody EstoqueDTO estoqueDTO){
+        Estoque estoque = estoqueService.buscarPorId(id);
+        estoque.setNome(estoqueDTO.getNome());
+        if (!produtoRepository.existsByEstoque(id)){
+            estoque.setAnimal(estoqueDTO.getAnimal());
+        }else {
+            return ResponseEntity.badRequest().body("Animal do estoque não pode ser modificado!");
+        }
+        try{
+            return ResponseEntity.ok(estoqueService.editar(id, estoque));
+        }catch (Exception e ){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
     //deletar
     @DeleteMapping("/{id}")
