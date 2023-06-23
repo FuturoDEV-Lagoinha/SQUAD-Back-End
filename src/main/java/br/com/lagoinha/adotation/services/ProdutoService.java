@@ -48,23 +48,14 @@ public class ProdutoService {
 
         // as variáveis não modificadas pelo usuário serão permanecidas como estão:
 
-        if(produto.getProduto() == null || produto.getProduto().isEmpty()){
-            produtoPesquisado.setProduto(produto.getProduto());
-        }
-        if(produto.getAnimal() == null || produto.getAnimal().isEmpty()){
-            produtoPesquisado.setAnimal(produto.getAnimal());
-        }
-        if(produto.getCategoria() == null || produto.getCategoria().isEmpty()){
-            produtoPesquisado.setCategoria(produto.getCategoria());
-        }
-        if(produto.getQuantidade() == null || produto.getQuantidade().toString().isEmpty()){
-            produtoPesquisado.setQuantidade(produto.getQuantidade());
-        }
-
-
-
-        if(produtoPesquisado != null){
-            BeanUtils.copyProperties(produto, produtoPesquisado);
+        //if(produto.getAnimal() == null || produto.getAnimal().isEmpty()){
+        //    produtoPesquisado.setAnimal(produto.getAnimal());
+        //}
+        //if(produto.getCategoria() == null || produto.getCategoria().isEmpty()){
+        //    produtoPesquisado.setCategoria(produto.getCategoria());
+        //}
+        if(produto.getQuantidade() != null && produto.getProduto() != null){
+            //BeanUtils.copyProperties(produto, produtoPesquisado);
             return this.produtoRepository.save(produtoPesquisado);
         }
         return null;
