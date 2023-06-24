@@ -37,19 +37,12 @@ public class ProdutoController {
     @PostMapping
     public ResponseEntity<?> salvar(@RequestBody ProdutoDTO produtoDto) {
         Produto produto = new Produto();
-        produto.setId(null);
-        produto.setProduto(produtoDto.getProduto());
-        produto.setAnimal(produtoDto.getAnimal());
-        produto.setCategoria(produtoDto.getCategoria());
-        produto.setQuantidade(produtoDto.getQuantidade());
-
         Estoque estoque = estoqueService.buscarPorId(produtoDto.getEstoque());
         if(estoque == null) {
             return ResponseEntity.badRequest().body("Estoque não encontrado");
         }
-        produto.setEstoque(estoque);
         try{
-        produto = produtoService.salvar(produto);
+        produto = produtoService.salvar(produtoDto);
         return ResponseEntity.ok(produto);
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -60,13 +53,9 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     public ResponseEntity atualizar(@PathVariable Long id, @RequestBody ProdutoEditDTO produtoEditDTO) {
-
-        Produto produtoAtualizado = buscarPorId(id);
-        produtoAtualizado.setProduto(produtoEditDTO.getProduto());
-        produtoAtualizado.setQuantidade(produtoEditDTO.getQuantidade());
-
+        produtoEditDTO.setId(id);
         try{
-            return ResponseEntity.ok(produtoService.salvar(produtoAtualizado));
+            return ResponseEntity.ok(produtoService.atualizar(produtoEditDTO));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

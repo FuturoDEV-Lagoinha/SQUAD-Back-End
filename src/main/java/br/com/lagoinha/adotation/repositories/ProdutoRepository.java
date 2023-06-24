@@ -11,8 +11,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     Optional<Produto> findById(Long id);
 
-    //Optional<Produto> findByProdutoIgnoreCase(String produto);
-
     @Query("SELECT CASE WHEN (count(*) > 0) THEN TRUE ELSE FALSE END FROM Produto p WHERE p.estoque.id = :idEstoque")
     boolean existsByEstoque(Long idEstoque);
 }
