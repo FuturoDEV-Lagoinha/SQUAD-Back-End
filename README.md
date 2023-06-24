@@ -32,9 +32,26 @@ A aplicação será iniciada na porta 8080, por exemplo.
 
 Será necessário o uso de _EndPoints_
 
+* Para Login de Usuário
+
+**POST** '/login'
+
+_Body_ requisição
+```json
+{
+  "email": "fulano@gmail.com",
+  "senha": 12345678
+}
+```
+Resposta esperada: O usuário estando cadastrado e sua 
+senha e email estiverem corretos, ele entra no sistema.
+Caso contrário, será necessário fazer o cadastro.
+
 * Para Cadastrar Usuário
 
 **POST** '/usuario'
+
+_Body_ requisição
 ```json
 {
   "nome": "Fulano de Tal",
@@ -42,24 +59,233 @@ Será necessário o uso de _EndPoints_
   "senha": 12345678
 }
 ```
-* Para Cadastrar Produto
-**POST** '/produto'
+_Body_ resposta esperada
 ```json
 {
-  
-}
-```
-
-* Para Login de Usuário
-
-**POST** '/login'
-```json
-{
+  "id": 1,
+  "nome": "Fulano de Tal",
   "email": "fulano@gmail.com",
   "senha": 12345678
 }
 ```
 
+---
+
+* Para Cadastrar Produto
+
+**POST** '/produto'
+
+_Body_ requisição
+
+```json
+{
+  "produto": "ração",
+  "quantidade": "10",
+  "animal": "gato",
+  "categoria": "adulto"
+}
+```
+_Body_ resposta esperada
+
+```json
+{
+  "id": "11",
+  "produto": "ração",
+  "quantidade": "10",
+  "animal": "gato",
+  "categoria": "adulto"
+}
+```
+
+* Para listar todos Produtos
+
+O sistema apresenta uma lista com todos produtos cadastrados.
+
+
+**GET** '/produto'
+
+Requisição _/produto_
+
+_Body_ resposta esperada
+
+```json
+[
+    {
+      "id": "11",
+      "produto": "ração",
+      "quantidade": "10",
+      "animal": "gato",
+      "categoria": "adulto"
+    },
+    
+    {
+       "id": "12",
+       "produto": "antipulgas",
+       "quantidade": "30",
+       "animal": "gato",
+       "categoria": "adulto"
+    }  
+]
+```
+
+* Para buscar determinado produto
+
+**GET** '/produto/id'
+
+Requisição:  _/produto/11_
+
+_Body_ resposta esperada
+
+```json
+{
+  "id": "11",
+  "produto": "ração",
+  "quantidade": "10",
+  "animal": "gato",
+  "categoria": "adulto"
+}
+```
+
+* Para Editar produto
+
+Apenas o tipo de produto e a sua quantidade poderão 
+ser editados.
+
+**PUT** '/produto/id'
+
+Requisição:  _/produto/11_
+
+_Body_ 
+```json
+{
+  "produto": "ração",
+  "quantidade": "10"
+}
+```
+Após serem definidas as mudanças necessárias, neste caso 
+o tipo de ração armazenada e sua quantidade. 
+
+_Body_ resposta esperada
+
+```json
+{
+  "id": "11",
+  "produto": "ração trato gastrointestinal",
+  "quantidade": "2",
+  "animal": "gato",
+  "categoria": "adulto"
+}
+```
+
+* Para Excluir um produto
+
+**DELETE** 'produto/id'
+
+Requisição: _/produto/11_
+
+Resposta esperada: O produto será excluído 
+e não constará mais na listagem.
+
+---
+
+* Para Cadastrar Estoque
+
+**POST** '/estoque'
+
+_Body_ Requisição
+
+```json
+{
+  "nome": "Estoque 3",
+  "animal": "cachorro"
+}
+```
+
+_Body_ resposta esperada
+
+```json
+{
+  "id": "3",
+  "nome": "Estoque 3",
+  "animal": "cachorro"
+}
+```
+
+* Para listar todos os Estoques existentes
+
+**GET** '/estoque'
+
+_Body_ resposta esperada
+
+```json
+[
+    {
+      "id": "1",
+      "nome": "Estoque 1",
+      "animal": "cachorro"
+    },
+    
+    {
+       "id": "2",
+       "nome": "Estoque 2",
+       "animal": "gato"
+    }  
+]
+```
+
+* Para listar determinado Estoque
+
+**GET** '/estoque/id'
+
+Requisição: /estoque/3
+
+_Body_ resposta esperada
+
+```json
+{
+  "id": "3",
+  "nome": "Estoque 3",
+  "animal": "cachorro"
+}
+```
+
+* Para Editar o Estoque
+
+**PUT** '/estoque/id'
+
+Requisição:  _/estoque/4_
+
+_Body_
+```json
+{
+  "nome": "Estoque 4",
+  "animal": "cachorro"
+}
+```
+
+Após as alterações necessárias serem feitas, neste caso
+houve a mudança de estoque e animal.
+
+_Body_ resposta esperada
+
+```json
+{
+  "id": "4",
+  "nome": "Estoque 5",
+  "animal": "gato"
+}
+```
+
+* Para Excluir um Estoque
+
+**DELETE** 'estoque/id'
+
+Requisição: _/estoque/2_
+
+Resposta esperada: O Estoque será excluído
+e não constará mais na listagem.
+
+---
 
 ## 👏Pessoas envolvidas no projeto
 

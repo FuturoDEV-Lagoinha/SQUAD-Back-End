@@ -16,4 +16,5 @@ public interface EstoqueRepository extends JpaRepository<Estoque, Long> {
 
     //@Query("SELECT e FROM Estoque e WHERE e.animal LIKE UPPER(:animal)")
     //Optional<Estoque> findByAnimal(String animal);
+
 }

@@ -27,9 +27,11 @@ public class EstoqueService {
             throw new Exception("Nome é obrigatório!");
         }
         if (estoque.getAnimal() == null || estoque.getAnimal().isEmpty()){
-            throw new Exception("Valor para estoque é obrigatório!");
-
+            throw new Exception("Animal para estoque é obrigatório!");
         }
+
+
+
             return  estoqueRepository.save(estoque);
     }
 
@@ -64,7 +66,7 @@ public class EstoqueService {
             throw new Exception("Estoque possui produto");
         }
         if (estoquePesquisado == null){
-            throw new Exception("Estoque nao pode ser deletado");
+            throw new Exception("Id do estoque é obrigatório");
         }
         this.estoqueRepository.deleteById(id);
         return true;
