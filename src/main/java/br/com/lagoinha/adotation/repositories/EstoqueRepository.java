@@ -11,10 +11,6 @@ import java.util.Optional;
 public interface EstoqueRepository extends JpaRepository<Estoque, Long> {
     Optional<Estoque> findById(Long id);
 
-    //@Query("SELECT CASE WHEN (count(*) > 0) THEN TRUE ELSE FALSE END FROM Estoque e WHERE e.animal = :animal")
-    //boolean estoqueGato(String animal);
 
-    //@Query("SELECT e FROM Estoque e WHERE e.animal LIKE UPPER(:animal)")
-    //Optional<Estoque> findByAnimal(String animal);
 
 }
