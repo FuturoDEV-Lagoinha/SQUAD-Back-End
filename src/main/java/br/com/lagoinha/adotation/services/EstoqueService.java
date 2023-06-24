@@ -29,9 +29,6 @@ public class EstoqueService {
         if (estoque.getAnimal() == null || estoque.getAnimal().isEmpty()){
             throw new Exception("Animal para estoque é obrigatório!");
         }
-
-
-
             return  estoqueRepository.save(estoque);
     }
 

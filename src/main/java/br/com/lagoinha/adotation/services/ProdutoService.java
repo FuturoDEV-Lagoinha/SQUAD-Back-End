@@ -56,7 +56,7 @@ public class ProdutoService {
     }
 
     public Produto atualizar(ProdutoEditDTO produtoEditDto){
-        Produto produtoPesquisado = buscarPorId(produtoEditDto.getId());;
+        Produto produtoPesquisado = buscarPorId(produtoEditDto.getId());
 
         // as variáveis não modificadas pelo usuário serão permanecidas como estão:
 
