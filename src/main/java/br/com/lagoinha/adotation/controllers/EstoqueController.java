@@ -1,6 +1,5 @@
 package br.com.lagoinha.adotation.controllers;
 
-import br.com.lagoinha.adotation.dtos.EstoqueDTO;
 import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.repositories.ProdutoRepository;
 import br.com.lagoinha.adotation.services.EstoqueService;
@@ -42,16 +41,10 @@ public class EstoqueController {
 
     //editar
     @PutMapping("/{id}")
-    public ResponseEntity put(@PathVariable Long id, @RequestBody EstoqueDTO estoqueDTO){
-        Estoque estoque = estoqueService.buscarPorId(id);
-        estoque.setNome(estoqueDTO.getNome());
-        if (!produtoRepository.existsByEstoque(id)){
-            estoque.setAnimal(estoqueDTO.getAnimal());
-        }else {
-            return ResponseEntity.badRequest().body("Animal do estoque não pode ser modificado!");
-        }
+    public ResponseEntity put(@PathVariable Long id, @RequestBody Estoque estoque){
+        estoque.setId(id);
         try{
-            return ResponseEntity.ok(estoqueService.editar(id, estoque));
+            return ResponseEntity.ok(estoqueService.editar(estoque));
         }catch (Exception e ){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -44,12 +44,12 @@ public class EstoqueService {
 
 
     //editar
-    public Estoque editar(Long id, Estoque estoqueAtualizado){
-        Estoque estoquePesquisado = buscarPorId(id);
+    public Estoque editar(Estoque estoqueAtualizado){
+        Estoque estoquePesquisado = buscarPorId(estoqueAtualizado.getId());
         if (estoquePesquisado != null){
             estoquePesquisado.setNome(estoqueAtualizado.getNome());
             estoquePesquisado.setAnimal(estoqueAtualizado.getAnimal());
-            return estoqueRepository.save(estoquePesquisado);
+            return this.estoqueRepository.save(estoquePesquisado);
         }
         return null;
     }
