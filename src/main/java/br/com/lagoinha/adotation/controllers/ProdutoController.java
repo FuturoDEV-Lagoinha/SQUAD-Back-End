@@ -6,7 +6,6 @@ import br.com.lagoinha.adotation.entities.Estoque;
 import br.com.lagoinha.adotation.entities.Produto;
 import br.com.lagoinha.adotation.services.EstoqueService;
 import br.com.lagoinha.adotation.services.ProdutoService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +26,11 @@ public class ProdutoController {
     @GetMapping("/{id}")
     public Produto buscarPorId(@PathVariable Long id){
         return this.produtoService.buscarPorId(id);
+    }
+
+    @GetMapping("/{idEstoque}")
+    public Produto buscarPorEstoque(@PathVariable Long idEstoque){
+        return this.produtoService.buscarPorId(idEstoque);
     }
 
     @GetMapping
@@ -61,6 +65,8 @@ public class ProdutoController {
         }
     }
 
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         try{
@@ -69,6 +75,5 @@ public class ProdutoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
 
 }

@@ -76,7 +76,13 @@ public class ProdutoService {
         return null;
     }
 
-
+    public Produto buscarPorEstoque(Long idEstoque) {
+        Optional<Produto> produtoPesquisado = this.produtoRepository.findById(idEstoque);
+        if(produtoPesquisado.isPresent()){
+            return produtoPesquisado.get();
+        }
+        return null;
+    }
 
     public boolean removerPorId(Long id) {
         try{
