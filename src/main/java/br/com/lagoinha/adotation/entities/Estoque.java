@@ -1,10 +1,14 @@
 package br.com.lagoinha.adotation.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Estoque {
 
     @Id
@@ -18,4 +22,5 @@ public class Estoque {
     @Column(length = 10, nullable = false)
     private String animal;
 
+    private Boolean situacao = true;
 }
