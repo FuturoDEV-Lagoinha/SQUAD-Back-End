@@ -46,8 +46,9 @@ public class ProdutoController {
             return ResponseEntity.badRequest().body("Estoque não encontrado");
         }
         try{
-        produto = produtoService.salvar(produtoDto);
-        return ResponseEntity.ok(produto);
+            produto.setId(null);
+            produto = produtoService.salvar(produtoDto);
+            return ResponseEntity.ok(produto);
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
