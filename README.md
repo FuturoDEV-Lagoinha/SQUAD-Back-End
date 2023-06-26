@@ -294,3 +294,14 @@ e não constará mais na listagem.
 <a href= "https://www.linkedin.com/in/renato-aires-5128b7189/" target= "_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" target= "_blank"/> Renato
 #
 <a href= "https://www.linkedin.com/in/vini-andrade-35ab6421/" target= "_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" target= "_blank"/> Vinícius
+
+
+## Considerações Finais Sobre o Projeto
+
+Algumas funcionalidades começaram a ser desenvolvidas, como o "findByEstoque" para produtos,
+mas como não era exigência, sua implementação não foi concluída, devido a outras prioridades da fatoração.
+
+Ainda não sabemos como enviar determinados erros do back-end para o front-end, como, por exemplo, quando
+alguém tenta deletar um estoque com um produto dentro e não consegue. Preferimos manter o cumprimento da exigência
+do curso, mas temos o ônus de não obter essa informação no front-end.
+
