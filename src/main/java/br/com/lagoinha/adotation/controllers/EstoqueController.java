@@ -28,6 +28,7 @@ public class EstoqueController {
     @PostMapping
     public ResponseEntity post(@RequestBody Estoque estoque){
         try {
+            estoque.setId(null);
             return ResponseEntity.ok(estoqueService.cadastrar(estoque));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
